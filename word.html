@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MS Word | Computer Science Portfolio</title>
+
+   
+
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+<style>
+
+ {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+
+    --green: #17382e;
+    --green-dark: #0d241d;
+
+    --paper: #f5f0e1;
+    --paper-light: #fffdf6;
+
+    --yellow: #e8a33d;
+    --coral: #e2725b;
+
+    --text: #20261f;
+}
+
+
+body {
+
+    font-family: "Work Sans", sans-serif;
+
+    background: var(--paper);
+
+    color: var(--text);
+
+    min-height: 100vh;
+}
+
+
+/* ==============================
+   HEADER
+================================ */
+
+.page-header {
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.05),
+            transparent 40%
+        ),
+
+        var(--green);
+
+    color: var(--paper);
+
+      padding: 20px 20px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.page-header::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+}
+
+
+.header-content {
+
+    max-width: 1100px;
+
+    margin: auto;
+ 
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.eyebrow {
+
+    display: inline-block;
+
+    font-family: "IBM Plex Mono", monospace;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: var(--yellow);
+
+    border: 1px solid rgba(232,163,61,.5);
+
+    padding: 8px 14px;
+
+    border-radius: 50px;
+
+    margin-bottom: 25px;
+}
+
+
+.page-header h1 {
+
+    font-family: "Kalam", cursive;
+
+    font-size: clamp(50px, 8vw, 90px);
+
+    line-height: 1;
+
+    margin-bottom: 25px;
+}
+
+
+.page-header h1 span {
+
+    color: var(--yellow);
+}
+
+
+.page-header p {
+
+    max-width: 650px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #d9e3db;
+}
+
+
+/* ==============================
+   WORD SECTION
+================================ */
+
+.word-section {
+
+    padding: 80px 20px;
+}
+
+
+.container {
+
+    max-width: 1100px;
+
+    margin: auto;
+}
+
+
+/* ==============================
+   SECTION HEADING
+================================ */
+
+.section-heading {
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: flex-start;
+
+    margin-bottom: 45px;
+}
+
+
+.number {
+
+    font-family: "IBM Plex Mono", monospace;
+
+    color: var(--coral);
+
+    font-size: 15px;
+
+    padding-top: 8px;
+}
+
+
+.small-title {
+
+    font-family: "IBM Plex Mono", monospace;
+
+    color: #777163;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+.section-heading h2 {
+
+    font-family: "Kalam", cursive;
+
+    font-size: 42px;
+
+    margin: 5px 0 8px;
+}
+
+
+.section-heading p {
+
+    max-width: 650px;
+
+    color: #666052;
+
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   FLEXBOX GALLERY
+================================ */
+
+.word-gallery {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+
+/* ==============================
+   CARDS
+================================ */
+
+.word-card {
+
+    position: relative;
+
+    flex: 1 1 calc(33.333% - 20px);
+
+    min-width: 280px;
+
+    height: 260px;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: var(--green);
+
+    border: 2px solid transparent;
+
+    box-shadow:
+        0 10px 25px rgba(28,59,50,.10);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+
+.word-card:hover {
+
+    transform: translateY(-10px);
+
+    border-color: var(--yellow);
+
+    box-shadow:
+        0 25px 50px rgba(28,59,50,.22);
+}
+
+
+/* ==============================
+   IMAGE
+================================ */
+
+.word-card > img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .6s ease,
+        filter .4s ease;
+}
+
+
+.word-card:hover > img {
+
+    transform: scale(1.08);
+
+    filter: brightness(.7);
+}
+
+
+/* ==============================
+   IMAGE OVERLAY
+================================ */
+
+.card-overlay {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    padding: 25px 20px 18px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.85)
+        );
+
+    color: white;
+
+    z-index: 5;
+
+    transform: translateY(5px);
+
+    transition: .3s ease;
+}
+
+
+.card-overlay span {
+
+    font-family: "IBM Plex Mono", monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color: var(--yellow);
+}
+
+
+.card-overlay h3 {
+
+    font-family: "Kalam", cursive;
+
+    font-size: 24px;
+
+    margin-top: 3px;
+}
+
+
+/* ==============================
+   VIDEO CARD
+================================ */
+
+.video-card {
+
+    cursor: pointer;
+}
+
+
+/*
+    Video is hidden initially.
+    The cover image is visible.
+*/
+
+.hover-video {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    z-index: 2;
+
+    transition: opacity .35s ease;
+}
+
+
+/*
+    When JavaScript adds "playing"
+*/
+
+.video-card.playing .hover-video {
+
+    opacity: 1;
+}
+
+
+/* ==============================
+   VIDEO COVER
+================================ */
+
+.video-cover {
+
+    transition:
+        opacity .35s ease,
+        transform .6s ease;
+}
+
+
+.video-card.playing .video-cover {
+
+    opacity: 0;
+}
+
+
+/* ==============================
+   HOVER PLAY LABEL
+================================ */
+
+.video-hover-label {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 4;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    background: rgba(0,0,0,.72);
+
+    backdrop-filter: blur(6px);
+
+    color: white;
+
+    border-radius: 50px;
+
+    font-family: "IBM Plex Mono", monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+
+.play-icon {
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    background: var(--yellow);
+
+    color: var(--green-dark);
+
+    font-size: 13px;
+}
+
+
+.video-card.playing .video-hover-label {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.8);
+}
+
+
+/* ==============================
+   VIDEO TEXT
+================================ */
+
+.video-text {
+
+    z-index: 6;
+}
+
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+    .word-card {
+
+        flex-basis:
+            calc(50% - 20px);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .page-header {
+
+        padding: 65px 20px;
+
+    }
+
+
+    .word-section {
+
+        padding: 55px 15px;
+
+    }
+
+
+    .section-heading {
+
+        gap: 12px;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 34px;
+
+    }
+
+
+    .word-card {
+
+        flex-basis: 100%;
+
+        min-width: 100%;
+
+        height: 260px;
+
+    }
+
+}
+
+</style>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="page-header">
+
+        <div class="header-content">
+
+            <span class="eyebrow">
+                COMPUTER SCIENCE · PORTFOLIO
+            </span>
+
+            <h1>
+                Microsoft <span>Word</span>
+            </h1>
+
+            <p>
+              
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         WORD PROJECT SECTION
+    ========================== -->
+
+    <section class="word-section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="number">
+                    01
+                </span>
+
+                <div>
+
+                    <span class="small-title">
+                        MICROSOFT OFFICE
+                    </span>
+
+                    <h2>
+                        MS Word Projects
+                    </h2>
+
+                    <p>
+                       
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 FLEXBOX CARDS
+            ========================== -->
+
+            <div class="word-gallery">
+
+
+                <!-- CARD 1 - IMAGE -->
+
+                <div class="word-card">
+
+                    <img
+                        src="word/word.png"
+                        alt="Microsoft Word Project 1"
+                    >
+
+                    <div class="card-overlay">
+
+                   
+
+                        <h3>
+                            Document Formatting
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD 2 - IMAGE -->
+
+                <div class="word-card">
+
+                    <img
+                        src="word/word1.png"
+                        alt="Microsoft Word Project 2"
+                    >
+
+                    <div class="card-overlay">
+
+                       
+                        <h3>
+                            Page Layout
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD 3 - IMAGE -->
+
+                <div class="word-card">
+
+                    <img
+                        src="word/word3.png"
+                        alt="Microsoft Word Project 3"
+                    >
+
+                    <div class="card-overlay">
+
+                        
+                        <h3>
+                            Tables & Formatting
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD 4 - IMAGE -->
+
+                <div class="word-card">
+
+                    <img
+                        src="word/word4.png"
+                        alt="Microsoft Word Project 4"
+                    >
+
+                    <div class="card-overlay">
+
+                      
+
+                        <h3>
+                            Student Activity
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD 5 - IMAGE -->
+
+                <div class="word-card">
+
+                    <img
+                        src="word/word5.png"
+                        alt="Microsoft Word Project 5"
+                    >
+
+                    <div class="card-overlay">
+
+                       
+
+                        <h3>
+                            Practical Exercise
+                        </h3>
+
+                    </div>
+
+                </div>
+        <div class="word-card">
+
+                    <img
+                        src="word/word6.png"
+                        alt="Microsoft Word Project 5"
+                    >
+
+                    <div class="card-overlay">
+
+                  
+
+                        <h3>
+                            Practical Exercise
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /*
+        Find every video card
+    */
+
+    const videoCards =
+        document.querySelectorAll(".video-card");
+
+
+    videoCards.forEach(function (card) {
+
+        const video =
+            card.querySelector(".hover-video");
+
+
+        if (!video) {
+            return;
+        }
+
+
+        /*
+            MOUSE ENTER
+
+            Video starts automatically
+            when the user hovers over card.
+        */
+
+        card.addEventListener("mouseenter", function () {
+
+            video.currentTime = 0;
+
+            card.classList.add("playing");
+
+
+            /*
+                Play video
+            */
+
+            const playPromise =
+                video.play();
+
+
+            /*
+                Some browsers may block autoplay.
+            */
+
+            if (playPromise !== undefined) {
+
+                playPromise.catch(function (error) {
+
+                    console.log(
+                        "Video autoplay was blocked:",
+                        error
+                    );
+
+                });
+
+            }
+
+        });
+
+
+        /*
+            MOUSE LEAVE
+
+            Stop the video and return
+            to the cover image.
+        */
+
+        card.addEventListener("mouseleave", function () {
+
+            video.pause();
+
+            video.currentTime = 0;
+
+            card.classList.remove("playing");
+
+        });
+
+    });
+
+});
+
+</script>
+
+ 
+
+</body>
+
+</html>
+

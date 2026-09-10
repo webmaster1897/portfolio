@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tayyaba Nasir — Computer Science Teacher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --chalk-green:#1C3B32;
+    --chalk-green-dark:#12271F;
+    --paper:#F5F0E1;
+    --paper-2:#EFE7D2;
+    --ink:#20261F;
+    --mustard:#E8A33D;
+    --coral:#E2725B;
+    --word:#3D6B9E;
+    --excel:#1D6F42;
+    --ppt:#C0521B;
+    --canva:#6B4FA0;
+    --sim:#2A9D8F;
+    --proto:#B3405A;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,.chalk{font-family:'Kalam', cursive;}
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:.03em;}
+
+  a{color:inherit;}
+
+  /* ===== HERO / CHALKBOARD ===== */
+  .hero{
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,255,255,0.03), transparent 60%),
+      var(--chalk-green);
+    color:var(--paper);
+    padding:5rem 1.5rem 6rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:40px 40px;
+    pointer-events:none;
+  }
+  .hero-inner{
+    max-width:960px;
+    margin:0 auto;
+    position:relative;
+    z-index:1;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    font-size:.75rem;
+    letter-spacing:.15em;
+    color:var(--mustard);
+    border:1px solid rgba(232,163,61,0.5);
+    display:inline-block;
+    padding:.3rem .7rem;
+    border-radius:100px;
+    margin-bottom:1.5rem;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    margin:0 0 .5rem;
+    line-height:1.05;
+    font-weight:700;
+  }
+  .hero h1 span{color:var(--mustard);}
+  .hero p.tag{
+    max-width:560px;
+    font-size:1.15rem;
+    color:#DCE6D9;
+    margin:0 0 2.2rem;
+  }
+  .hero-photo-wrap{
+    display:flex;
+    gap:2.5rem;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .hero-photo{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:4px solid var(--mustard);
+    object-fit:cover;
+    flex-shrink:0;
+    background:var(--paper-2);
+  }
+  .hero-links{
+    display:flex;
+    gap:.9rem;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:.75rem 1.4rem;
+    border-radius:100px;
+    font-weight:600;
+    font-size:.95rem;
+    text-decoration:none;
+    border:2px solid var(--mustard);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn.solid{background:var(--mustard); color:var(--chalk-green-dark);}
+  .btn.solid:hover{transform:translateY(-2px);}
+  .btn.ghost{color:var(--paper); border-color:rgba(245,240,225,0.4);}
+  .btn.ghost:hover{border-color:var(--paper); transform:translateY(-2px);}
+
+  /* ===== SECTION HEADERS ===== */
+  section{padding:4.5rem 1.5rem;}
+  .section-inner{max-width:1080px; margin:0 auto;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:1rem;
+    margin-bottom:.5rem;
+    flex-wrap:wrap;
+  }
+  .section-head .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--coral);
+    font-size:.85rem;
+  }
+  .section-head h2{
+    font-size:2.2rem;
+    margin:0;
+  }
+  .section-sub{
+    color:#5B5548;
+    max-width:600px;
+    margin:0 0 2.5rem;
+  }
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--paper);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:3rem;
+    align-items:start;
+  }
+  .about p{color:#3C4038; font-size:1.05rem;}
+  .fact-card{
+    background:var(--paper-2);
+    border:1px solid rgba(0,0,0,0.06);
+    border-radius:var(--radius);
+    padding:1.25rem 1.4rem;
+    margin-bottom:.9rem;
+  }
+  .fact-card .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--sim);
+    display:block;
+    margin-bottom:.3rem;
+  }
+
+  /* ===== CORKBOARD / CARDS ===== */
+  .board{
+    background:
+      linear-gradient(var(--paper-2), var(--paper-2));
+    position:relative;
+  }
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:2rem;
+  }
+  .card{
+    background:#FFFDF6;
+    border-radius:var(--radius);
+    box-shadow:0 10px 24px rgba(28,59,50,0.08), 0 1px 0 rgba(0,0,0,0.03);
+    overflow:hidden;
+    position:relative;
+    transform:rotate(var(--rot, 0deg));
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:nth-child(2n){--rot:0.6deg;}
+  .card:nth-child(3n){--rot:-0.5deg;}
+  .card:hover{
+    transform:rotate(0deg) translateY(-4px);
+    box-shadow:0 16px 32px rgba(28,59,50,0.14);
+  }
+  .tape{
+    position:absolute;
+    top:-10px; left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    width:90px; height:26px;
+    background:rgba(232,163,61,0.75);
+    border:1px solid rgba(0,0,0,0.05);
+    z-index:2;
+  }
+  .card img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    display:block;
+    border-bottom:1px solid rgba(0,0,0,0.06);
+  }
+  .card-body{padding:1.3rem 1.4rem 1.5rem;}
+  .card-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    padding:.25rem .6rem;
+    border-radius:100px;
+    display:inline-block;
+    margin-bottom:.7rem;
+    color:#fff;
+  }
+  .card h3{margin:.2rem 0 .5rem; font-size:1.3rem;}
+  .card p{margin:0 0 1rem; color:#5B5548; font-size:.95rem;}
+  .card .link{
+    font-weight:600;
+    font-size:.9rem;
+    text-decoration:none;
+    border-bottom:2px solid currentColor;
+    padding-bottom:1px;
+  }
+
+  .tag-word{background:var(--word);}
+  .tag-excel{background:var(--excel);}
+  .tag-ppt{background:var(--ppt);}
+  .tag-canva{background:var(--canva);}
+  .tag-sim{background:var(--sim);}
+  .tag-proto{background:var(--proto);}
+
+  .link-word{color:var(--word);}
+  .link-excel{color:var(--excel);}
+  .link-ppt{color:var(--ppt);}
+  .link-canva{color:var(--canva);}
+  .link-sim{color:var(--sim);}
+  .link-proto{color:var(--proto);}
+
+  /* ===== FOOTER / CONTACT ===== */
+  footer{
+    background:var(--chalk-green-dark);
+    color:var(--paper);
+    padding:4rem 1.5rem 2.5rem;
+    text-align:center;
+  }
+  footer h2{font-size:2rem; margin-bottom:.6rem;}
+  footer p{color:#B9C4B4; margin-bottom:2rem;}
+  .foot-links{
+    display:flex;
+    justify-content:center;
+    gap:1.2rem;
+    flex-wrap:wrap;
+    margin-bottom:3rem;
+  }
+  .copyright{
+    font-size:.8rem;
+    color:#71806C;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+
+  .video-card {
+            position: relative;
+            background: transparent;
+        }
+
+
+        .hover-video {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            opacity: 1;
+
+            z-index: 1;
+
+            background: transparent;
+
+            pointer-events: none;
+        }
+
+
+        /* ==============================
+           VIDEO OVERLAY
+        ================================ */
+
+        .video-card .card-overlay {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 25px 20px 18px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,.85)
+                );
+
+            color: white;
+
+            z-index: 2;
+
+            pointer-events: none;
+        }
+
+
+        .card-overlay span {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+        }
+
+
+        .card-overlay h3 {
+            font-family: "Kalam", cursive;
+            font-size: 24px;
+            margin-top: 3px;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ================================ */
+
+        @media (max-width: 900px) {
+
+            .simulation-card {
+                flex-basis: calc(50% - 20px);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .page-header {
+                padding: 65px 20px;
+            }
+
+
+            .simulation-section {
+                padding: 55px 15px;
+            }
+
+
+            .section-heading {
+                gap: 12px;
+            }
+
+
+            .section-heading h2 {
+                font-size: 34px;
+            }
+
+
+            .simulation-card {
+                flex-basis: 100%;
+                min-width: 100%;
+                height: 260px;
+            }
+
+        }
+
+
+</style>
+</head>
+<body>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Computer Science Teacher</span>
+      <h1>Hi, I'm <span>Tayyaba Nasir</span>.</h1>
+      <p class="tag">I’m a Computer Science teacher who makes programming, computer applications, and digital skills simple, practical, and easy to understand. I enjoy helping students learn with confidence through clear and engaging lessons.</p>
+      <div class="hero-photo-wrap">
+    <div class="hero-photo" style="font-size: 100px;">🐦‍🔥</div>
+        <div class="hero-links">
+          <a class="btn solid" href="#work">See my work</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about">
+    <div class="section-inner">
+      <div class="section-head"><span class="num mono">01</span><h2>About</h2></div>
+      <div class="about-grid">
+        <p>
+          I’m a Computer Science teacher with experience teaching middle and senior secondary students, computer lab classes, online tuition, and FBISE courses. I make programming, office applications, and digital design easy to understand through simple, practical lessons. I enjoy helping students build confidence and develop skills for both exams and real-world use.I break down technical concepts — programming, office
+          applications, and digital design tools — into simple, easy-to-follow lessons.
+        </p>
+        <div>
+          <div class="fact-card">
+            <span class="k">Based in</span>
+            Sargodha, Punjab, Pakistan
+          </div>
+          <div class="fact-card">
+            <span class="k">Phone</span>
+            0302-5914349
+          </div>
+          <div class="fact-card">
+            <span class="k">Email</span>
+            tayyabanasir765@gmail.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="about" id="experience" style="background:var(--paper-2);">
+    <div class="section-inner">
+      <div class="section-head"><span class="num mono">02</span><h2>Experience</h2></div>
+      <p class="section-sub">A mix of classroom, computer-lab, and online teaching across middle school, senior secondary, and board-level students.</p>
+
+      <div class="fact-card" style="margin-bottom:1.4rem;">
+        <span class="k">March 2026 – August 2026 · Middle School</span>
+        <h3 style="margin:.2rem 0 .5rem; font-family:'Work Sans',sans-serif; font-size:1.1rem;">Computer Lab Teacher — WITS School, Sargodha</h3>
+        <p style="margin:0; color:#3C4038;">
+         Taught MS Word, Excel, PowerPoint, email, digital communication, and safe social media use. Guided students in Photoshop, Illustrator, Paint, and Canva through practical projects such as posters, magazines, advertisements, and business cards. Conducted hands-on lab sessions and helped students with hardware and software issues.
+        </p>
+      </div>
+
+      <div class="fact-card" style="margin-bottom:1.4rem;">
+        <span class="k">2024 – 2025, and Jan – Mar 2026 · High School (Senior Section) &amp; Middle School</span>
+        <h3 style="margin:.2rem 0 .5rem; font-family:'Work Sans',sans-serif; font-size:1.1rem;">Computer Science Teacher — Sky School, Sargodha</h3>
+        <p style="margin:0; color:#3C4038;">
+         Taught Computer Science, programming basics, computer fundamentals, and IT concepts. Prepared lessons, notes, quizzes, and assessments while helping students prepare for school and FBISE board examinations.
+        </p>
+      </div>
+
+      <div class="fact-card" style="margin-bottom:1.4rem;">
+        <span class="k">2024 – 2025 · Self-employed</span>
+        <h3 style="margin:.2rem 0 .5rem; font-family:'Work Sans',sans-serif; font-size:1.1rem;">Online Tuition Teacher</h3>
+        <p style="margin:0; color:#3C4038;">Provided online tuition in Computer Science, Mathematics, and Science for 1st- and 2nd-year students. Created simple notes and exam practice material to make difficult topics easier to understand.
+        </p>
+      </div>
+
+      <div class="fact-card">
+        <span class="k">2024 – 2025 · Grades 6–8, and FBISE 1st/2nd Year</span>
+        <h3 style="margin:.2rem 0 .5rem; font-family:'Work Sans',sans-serif; font-size:1.1rem;">Community Service Teacher</h3>
+        <p style="margin:0; color:#3C4038;">
+         Taught basic Science and Computer Science, supported classroom activities, checked student work, and provided extra guidance to students who needed additional help.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION & SKILLS ================= -->
+  <section class="about" id="education">
+    <div class="section-inner">
+      <div class="section-head"><span class="num mono">03</span><h2>Education &amp; Skills</h2></div>
+      <div class="about-grid">
+        <div>
+          <div class="fact-card">
+            <span class="k">December 2023 · GPA 3.09</span>
+            <strong>BS Software Engineering</strong> — University of Engineering and Technology (UET), Taxila
+          </div>
+          <div class="fact-card">
+            <span class="k">December 2018 · GPA 83%</span>
+            <strong>FSc Pre-Engineering</strong> — Fazaia Model Intermediate College (FAZMIC), Sargodha
+          </div>
+          <div class="fact-card">
+            <span class="k">GPA 90.7%</span>
+            <strong>Matric (Science)</strong> — The Harvard School, Sargodha
+          </div>
+        </div>
+        <div>
+          <div class="fact-card">
+            <span class="k">Teaching</span>
+            Computer Science (FBISE Board / Intermediate &amp; Secondary), Lesson Planning &amp; Classroom Management, Online Teaching
+          </div>
+          <div class="fact-card">
+            <span class="k">Technical</span>
+            Programming (Java, Python), MySQL, React, Computer Troubleshooting &amp; Lab Instruction
+          </div>
+          <div class="fact-card">
+            <span class="k">Office &amp; Design</span>
+            MS Word, Excel, PowerPoint · Adobe Photoshop, Illustrator, MS Paint, Canva · Email &amp; Google Workspace
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK / CARDS ================= -->
+  <section class="board" id="work">
+    <div class="section-inner">
+      <div class="section-head"><span class="num mono">04</span><h2>Tutorials &amp; Projects</h2></div>
+      <p class="section-sub">
+     
+        
+      </p>
+
+      <div class="card-grid">
+
+        <article class="card">
+          <div class="tape"></div>
+          <img src="word/word5.png">
+          <div class="card-body">
+            <span class="card-tag tag-word">MS Word</span>
+            <h3>Word Tutorials</h3>
+            <p>Lessons on formatting, document layout, and everyday MS Word skills .</p>
+            <a class="link link-word" href="word.html">View examples →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tape"></div>
+          <img src="excel/excela5.png" >
+          <div class="card-body">
+            <span class="card-tag tag-excel">Excel</span>
+            <h3>Excel Tutorials</h3>
+            <p>Practical spreadsheet lessons ,formulas, tables, and everyday Excel skills .</p>
+            <a class="link link-excel" href="excel.html">View examples →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tape"></div>
+          <img src="ppt/power1.png" >
+          <div class="card-body">
+            <span class="card-tag tag-ppt">PowerPoint</span>
+            <h3>PowerPoint Tutorials</h3>
+            <p>Slide-design lessons that help students present ideas clearly </p>
+            <a class="link link-ppt" href="powerpoint.html">View examples →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tape"></div>
+          <img src="canva/c3.png" alt="Canva tutorial placeholder — replace with your own image">
+          <div class="card-body">
+            <span class="card-tag tag-canva">Canva</span>
+            <h3>Canva Tutorials</h3>
+            <p>Introducing Canva as a creative design tool </p>
+            <a class="link link-canva" href="canva.html">View examples →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="tape"></div>
+          <img src="simulation/sc5.png" alt="Simulation software placeholder — replace with your own image">
+          <div class="card-body">
+            <span class="card-tag tag-sim">Simulation</span>
+            <h3>Simulation Software</h3>
+            <p>Custom simulation tools that turn Theory concepts into something students can see and try.</p>
+            <a class="link link-sim" href="simulation.html">View examples →</a>
+          </div>
+        </article>
+
+
+      <article class="card">
+          <div class="tape"></div>
+          <img src="simulation/sc6.png" alt="Simulation">
+          <div class="card-body">
+            <span class="card-tag tag-sim">Prototype</span>
+            <h3>Prototype Software</h3>
+            <p>Prototypes to visualize a digital citizen overview and workbooks and computer working</p>
+            <a class="link link-sim" href="prototype.html">View examples →</a>
+          </div>
+        </article>
+
+
+
+
+        <article class="card">
+ <div class="tape"></div>
+
+  <div class="simulation-card video-card">
+
+                    <video
+                        class="hover-video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                    >
+
+                        <source
+                            src="simulation/sc3.mp4"
+                            type="video/mp4"
+                        >
+
+                        Your browser does not support video.
+
+                    </video>
+
+
+                    <div class="card-overlay">
+
+                        <span>
+                            VIDEO DEMO
+                        </span>
+
+                         <span class="card-tag tag-proto">Prototype</span>
+            <h3>HTML Prototypes for Kids</h3>
+            <p>Small, playful web prototypes that make first programming and computer concepts fun for younger learners.</p>
+            <a class="link link-proto" href="prototype.html">View examples →</a>
+
+                    </div>
+
+                </div>
+
+      
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <footer id="contact">
+    <h2 class="chalk">Let's work together.</h2>
+    <p>Open to teaching roles, tuition, and custom learning tools. Sargodha, Punjab, Pakistan · 0302-5914349</p>
+    <div class="foot-links">
+      <a class="btn solid" href="mailto:tayyabanasir765@gmail.com">Email me</a>
+      <a class="btn ghost" href="#">LinkedIn</a>
+      <a class="btn ghost" href="#">Portfolio</a>
+    </div>
+    <div class="copyright">© 2026 Tayyaba Nasir. Built for the web.</div>
+  </footer>
+
+</body>
+</html>

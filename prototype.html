@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MS prototype | Computer Science Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #17382e;
+      --green-dark: #0d241d;
+      --paper: #f5f0e1;
+      --paper-light: #fffdf6;
+      --yellow: #e8a33d;
+      --coral: #e2725b;
+      --text: #20261f;
+    }
+
+    body {
+      font-family: "Work Sans", sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ============ HEADER ============ */
+
+    .page-header {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.05), transparent 40%),
+        var(--green);
+      color: var(--paper);
+      padding: 65px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .header-content {
+      max-width: 1100px;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--yellow);
+      border: 1px solid rgba(232,163,61,.5);
+      padding: 8px 14px;
+      border-radius: 50px;
+      margin-bottom: 25px;
+    }
+
+    .page-header h1 {
+      font-family: "Kalam", cursive;
+      font-size: clamp(50px, 8vw, 90px);
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    .page-header h1 span {
+      color: var(--yellow);
+    }
+
+    .page-header p {
+      max-width: 650px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #d9e3db;
+    }
+
+    /* ============ SECTION ============ */
+
+    .prototype-section {
+      padding: 80px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-heading {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 45px;
+    }
+
+    .number {
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--coral);
+      font-size: 15px;
+      padding-top: 8px;
+    }
+
+    .small-title {
+      font-family: "IBM Plex Mono", monospace;
+      color: #777163;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .section-heading h2 {
+      font-family: "Kalam", cursive;
+      font-size: 42px;
+      margin: 5px 0 8px;
+    }
+
+    .section-heading p {
+      max-width: 650px;
+      color: #666052;
+      line-height: 1.7;
+    }
+
+    /* ============ GALLERY ============ */
+
+    .prototype-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+    }
+
+    /* ============ CARDS ============ */
+
+    .prototype-card {
+      position: relative;
+      flex: 1 1 calc(33.333% - 20px);
+      min-width: 280px;
+      height: 260px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: var(--green);
+      border: 2px solid transparent;
+      box-shadow: 0 10px 25px rgba(28,59,50,.10);
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .prototype-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--yellow);
+      box-shadow: 0 25px 50px rgba(28,59,50,.22);
+    }
+
+    .prototype-card > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s ease, filter .4s ease;
+    }
+
+    .prototype-card:hover > img {
+      transform: scale(1.08);
+      filter: brightness(.7);
+    }
+
+    .card-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 25px 20px 18px;
+      background: linear-gradient(transparent, rgba(0,0,0,.85));
+      color: white;
+      z-index: 5;
+      transform: translateY(5px);
+      transition: .3s ease;
+    }
+
+    .card-overlay span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--yellow);
+    }
+
+    .card-overlay h3 {
+      font-family: "Kalam", cursive;
+      font-size: 24px;
+      margin-top: 3px;
+    }
+
+    /* ============ VIDEO CARD ============ */
+
+    .video-card {
+      cursor: pointer;
+    }
+
+    .hover-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity .35s ease;
+    }
+
+    .video-card.playing .hover-video {
+      opacity: 1;
+    }
+
+    .video-cover {
+      transition: opacity .35s ease, transform .6s ease;
+    }
+
+    .video-card.playing .video-cover {
+      opacity: 0;
+    }
+
+    .video-hover-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(6px);
+      color: white;
+      border-radius: 50px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+
+    .play-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      color: var(--green-dark);
+      font-size: 13px;
+    }
+
+    .video-card.playing .video-hover-label {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.8);
+    }
+
+    .video-text {
+      z-index: 6;
+    }
+
+    /* ============ RESPONSIVE ============ */
+
+    @media (max-width: 900px) {
+      .prototype-card {
+        flex-basis: calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-header {
+        padding: 65px 20px;
+      }
+
+      .prototype-section {
+        padding: 55px 15px;
+      }
+
+      .section-heading {
+        gap: 12px;
+      }
+
+      .section-heading h2 {
+        font-size: 34px;
+      }
+
+      .prototype-card {
+        flex-basis: 100%;
+        min-width: 100%;
+        height: 260px;
+      }
+    }
+
+    /* ============ PDF READER ============ */
+
+    .pdf-card {
+      cursor: pointer;
+    }
+
+    .pdf-reader {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .9);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+    }
+
+    .pdf-reader.active {
+      display: flex;
+    }
+
+    .pdf-reader-header {
+      height: 65px;
+      background: var(--green);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+    }
+
+    .pdf-reader-header h3 {
+      font-family: "Kalam", cursive;
+      font-size: 22px;
+    }
+
+    .pdf-reader-header button {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--green-dark);
+      font-size: 20px;
+      cursor: pointer;
+      transition: .3s ease;
+    }
+
+    .pdf-reader-header button:hover {
+      transform: rotate(90deg);
+    }
+
+    .pdf-content {
+      flex: 1;
+      width: 100%;
+      height: calc(100vh - 65px);
+      background: #222;
+    }
+
+    .pdf-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+
+.prototype-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="header-content">
+      <span class="eyebrow">COMPUTER SCIENCE · PORTFOLIO</span>
+      <h1><span>prototype</span></h1>
+      <p>
+Passive Footprint: Browsing activity.<br>
+Active Footprint: Posts and interactions.<br>
+Algorithms: Social media recommendations.<br>
+OOP Workbook: Object-Oriented Programming resource.
+</p>
+    </div>
+  </header>
+
+  <!-- PROTOTYPE PROJECT SECTION -->
+  <section class="prototype-section">
+    <div class="container">
+
+      <div class="section-heading">
+        <span class="number">01</span>
+        <div>
+          <span class="small-title">Prototype</span>
+          <h2>Prototype Projects</h2>
+        
+        </div>
+      </div>
+
+      <!-- CARDS -->
+      <div class="prototype-gallery">
+
+        <!-- CARD 1 -->
+<div class="prototype-card"
+     onclick="window.open('https://webmaster1897.github.io/Mobile_apps_prototypes/azan-science-fitness/azan-fitness.html', '_blank')"
+     style="cursor: pointer;">
+
+    <img src="prototype/p1.png" alt="Passive Footprint">
+
+    <div class="card-overlay">
+        <h3>Passive Footprint</h3>
+    </div>
+
+</div>
+
+        <!-- CARD 2 -->
+    <div class="prototype-card"
+     onclick="window.location.href='https://webmaster1897.github.io/Mobile_apps_prototypes/azan-science-fitness/azan-fitness.html'"
+     style="cursor: pointer;">
+
+    <img src="prototype/p2.png" alt="Passive Footprint">
+
+    <div class="card-overlay">
+        <h3>Passive Footprint</h3>
+    </div>
+
+</div>
+
+        <!-- CARD 3 -->
+   <div class="prototype-card"
+     onclick="window.location.href='https://webmaster1897.github.io/Mobile_apps_prototypes/hamna/hamna-homebody.html'"
+     style="cursor: pointer;">
+
+    
+          <img src="prototype/p3.png" alt="Facebook ForYou: Passive">
+          <div class="card-overlay">
+            <h3>Facebook ForYou: Passive</h3>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+    <div class="prototype-card"
+     onclick="window.location.href='https://webmaster1897.github.io/Mobile_apps_prototypes/hamna/hamna-homebody.html'"
+     style="cursor: pointer;">
+          <img src="prototype/p4.png" alt="Facebook Profile: Active">
+          <div class="card-overlay">
+            <h3>Facebook Profile: Active</h3>
+          </div>
+        </div>
+
+        <!-- CARD 5 - opens the PDF reader -->
+       <div class="prototype-card"
+     onclick="window.location.href='https://webmaster1897.github.io/Mobile_apps_prototypes/azan-science-fitness/azan-fitness.html'"
+     style="cursor: pointer;">
+          <img src="prototype/p5.png" alt="Instagram Feed: Algorithms">
+          <div class="card-overlay">
+            <h3>Instagram Feed: Algorithms</h3>
+          </div>
+        </div>
+
+        <!-- CARD 6 - opens the PDF reader -->
+        <div class="prototype-card pdf-card" onclick="openPDF('prototype/p6.pdf', 'E-book ch3 OOP')">
+          <img src="prototype/p6.png" alt="E-bboj">
+          <div class="card-overlay">
+            <h3>E-book ch3 OOP</h3>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PDF READER OVERLAY -->
+  <div id="pdfReader" class="pdf-reader">
+    <div class="pdf-reader-header">
+      <h3 id="pdfTitle">Instagram Feed: Algorithms</h3>
+      <button onclick="closePDF()">✕</button>
+    </div>
+    <div class="pdf-content">
+      <iframe id="pdfFrame" src="" title="PDF Reader"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function openPDF(pdfFile, title) {
+      const reader = document.getElementById("pdfReader");
+      const frame = document.getElementById("pdfFrame");
+      const titleEl = document.getElementById("pdfTitle");
+
+      titleEl.textContent = title || "Document";
+      frame.src = pdfFile;
+      reader.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePDF() {
+      const reader = document.getElementById("pdfReader");
+      const frame = document.getElementById("pdfFrame");
+
+      reader.classList.remove("active");
+      frame.src = "";
+      document.body.style.overflow = "";
+    }
+
+    // Close with ESC key
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closePDF();
+      }
+    });
+
+    // Hover-to-play video cards (only applies if a card has class "video-card"
+    // with a nested <video class="hover-video">; none exist on this page yet)
+    document.addEventListener("DOMContentLoaded", function () {
+      const videoCards = document.querySelectorAll(".video-card");
+
+      videoCards.forEach(function (card) {
+        const video = card.querySelector(".hover-video");
+        if (!video) return;
+
+        card.addEventListener("mouseenter", function () {
+          video.currentTime = 0;
+          card.classList.add("playing");
+
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(function (error) {
+              console.log("Video autoplay was blocked:", error);
+            });
+          }
+        });
+
+        card.addEventListener("mouseleave", function () {
+          video.pause();
+          video.currentTime = 0;
+          card.classList.remove("playing");
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
